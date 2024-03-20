@@ -54,6 +54,13 @@ export default function App() {
     saveTasks(updatedTasks);
   };
 
+  const onDeleteTaskPress = (index) => {
+    const updatedTasks = [...items];
+    const completedTask = updatedTasks.splice(index, 1)[0];
+    setItems(updatedTasks);
+    saveTasks(updatedTasks);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.tasksWrapper}>
@@ -64,6 +71,7 @@ export default function App() {
             <Task
               text={item.text}
               onPress={() => onTaskPress(index)}
+              onDeletePress={() => onDeleteTaskPress(index)}
               isCompleted={item.isCompleted}
               key={index}
             />

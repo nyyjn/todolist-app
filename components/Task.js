@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 const Task = (props) => {
-  const { text, onPress, isCompleted } = props;
+  const { text, onPress, onDeletePress, isCompleted } = props;
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.tasks}>
@@ -12,6 +12,14 @@ const Task = (props) => {
         <Text style={[styles.itemText, isCompleted && styles.completedText]}>
           {text}
         </Text>
+        <TouchableOpacity
+          onPress={onDeletePress}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        >
+          <View>
+            <Text style={styles.minus}>-</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );
@@ -31,9 +39,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 0 },
+    justifyContent: "space-between",
   },
   itemText: {
     fontSize: 17,
+    flexGrow: 1,
   },
   checkbox: {
     width: 24,
@@ -51,6 +61,11 @@ const styles = StyleSheet.create({
   completedText: {
     textDecorationLine: "line-through",
     color: "#888",
+  },
+  minus: {
+    color: "red",
+    fontWeight: "bold",
+    fontSize: "20",
   },
 });
 
